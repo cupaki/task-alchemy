@@ -1,6 +1,7 @@
 package com.task.alchemy.rest;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,7 +30,7 @@ public class EmployeeRestController {
 	
 	@GetMapping("/employees")
 	public List<Employee> findAll() {
-		return employeeService.findaAall();
+		return employeeService.findAll();
 	}
 	
 	@GetMapping("/employees/{id}")
@@ -63,6 +64,27 @@ public class EmployeeRestController {
 		employeeService.deleteById(id);
 		return "Employee deleted \nid: "
 			+ employee.getId() + "\nname: " + employee.getFirstName() + " " + employee.getLastName(); 
+	}
+	
+	@GetMapping("/employees/searchrole/{role}")
+	public List<Employee> findSameRole(@PathVariable String role) {
+		List<Employee> employeesWithSameRole = employeeService.findEmployeesWithSameRole(role);
+		
+		if(employeesWithSameRole == null) {
+			throw new RuntimeException("Employees not found");
+		}
+		else if(employeesWithSameRole.size() == 0) {
+			throw new RuntimeException("Employees not found");
+		}
+		
+		return employeesWithSameRole;
+	}
+	
+	@GetMapping("/employees/searchrolefilter/{role}")
+	public List<Employee> findSameRoleStream(@PathVariable String role) {
+		return  employeeService.findAll()
+				.stream().filter(r -> r.getRole().equals(role.toUpperCase())).collect(Collectors.toList());
+		
 	}
 	
 }

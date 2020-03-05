@@ -51,4 +51,13 @@ public class EmployeeDAOimpl implements EmployeeDAO {
 		query.executeUpdate();
 	}
 
+	@Override
+	public List<Employee> findEmployeesWithSameRole(String role) {
+		Session  currentSession = entityManager.unwrap(Session.class);
+		Query<Employee> query = currentSession.createQuery("from Employee where role=:employeeRole", Employee.class);
+		query.setParameter("employeeRole", role);
+		List<Employee> employesWithSameRole = query.getResultList();
+		return employesWithSameRole;
+	}
+
 }

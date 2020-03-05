@@ -40,7 +40,7 @@ public class EmployeeTest {
 		employeeList.add(new Employee("pep", "guardiola", "baldfraud@gmail.com", "manager"));
 		when(employeeDAOimpl.findAll()).thenReturn(employeeList);
 		
-		List<Employee> result = employeeServiceImpl.findaAall();
+		List<Employee> result = employeeServiceImpl.findAll();
 		assertEquals(2, result.size());
 	}
 	

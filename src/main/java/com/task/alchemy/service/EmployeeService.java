@@ -6,12 +6,14 @@ import com.task.alchemy.entity.Employee;
 
 public interface EmployeeService {
 
-	public List<Employee> findaAall();
+	public List<Employee> findAll();
 	
 	public Employee findbyId(int id);
 	
 	public void add(Employee newEmployee);
 	
 	public void deleteById(int id);
+	
+	public List<Employee> findEmployeesWithSameRole(String role);
 	
 }

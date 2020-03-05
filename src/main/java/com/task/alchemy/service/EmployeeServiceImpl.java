@@ -22,7 +22,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	@Override
 	@Transactional
-	public List<Employee> findaAall() {
+	public List<Employee> findAll() {
 		return employeDAO.findAll();
 	}
 
@@ -43,5 +43,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public void deleteById(int id) {
 		employeDAO.deleteById(id);
 	}
+
+	@Override
+	@Transactional
+	public List<Employee> findEmployeesWithSameRole(String role) {
+		return employeDAO.findEmployeesWithSameRole(role);
+	}
+	
 
 }

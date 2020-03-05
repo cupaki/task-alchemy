@@ -14,5 +14,7 @@ public interface EmployeeDAO {
 	
 	public void deleteById(int id);
 	
+	public List<Employee> findEmployeesWithSameRole(String role);
+	
 	
 }
